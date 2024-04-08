@@ -11,7 +11,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class DateSorterTest {
-    private DateSorter dateSorter = new DateSorter();
+    private final DateSorter dateSorter = new DateSorter();
     List<LocalDate> actualDates = Arrays.asList(LocalDate.of(2004,7,1),
             LocalDate.of(2005,1,2), LocalDate.of(2007,1,1),
             LocalDate.of(2032,5,3));
