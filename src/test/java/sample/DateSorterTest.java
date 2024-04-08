@@ -11,10 +11,13 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class DateSorterTest {
-    private DateSorter dateSorter;
-    List<LocalDate> newList = Arrays.asList(LocalDate.parse("2004-07-01"),
-            LocalDate.parse("2005-01-02"), LocalDate.parse("2007-01-01"),
-            LocalDate.parse("2032-05-03"));
+    private DateSorter dateSorter = new DateSorter();
+    List<LocalDate> actualDates = Arrays.asList(LocalDate.of(2004,07,01),
+            LocalDate.of(2005,01,02), LocalDate.of(2007,01,01),
+            LocalDate.of(2032,05,03));
+    List<LocalDate> expectedDates = Arrays.asList(LocalDate.of(2005,01,02),
+            LocalDate.of(2007,01,01), LocalDate.of(2032,05,03),
+            LocalDate.of(2004,07,01));
 
     @Test
     public void testSortEmptyList() {
@@ -36,47 +39,12 @@ public class DateSorterTest {
 
     @Test
     public void testSortListWithChronologicalOrder() {
-        List<LocalDate> unsortedDates = Arrays.asList(
-                LocalDate.of(2023, 1, 1),
-                LocalDate.of(2023, 2, 2),
-                LocalDate.of(2023, 3, 3)
-        );
-        Collection<LocalDate> sortedDates = dateSorter.sortDates(unsortedDates);
-
-        assertEquals(3, sortedDates.size());
-        assertEquals(LocalDate.of(2023, 1, 1), sortedDates.iterator().next());
-        assertEquals(LocalDate.of(2023, 2, 2), sortedDates.iterator().next());
-        assertEquals(LocalDate.of(2023, 3, 3), sortedDates.iterator().next());
-    }
-
-    @Test
-    public void testSortListWithReverseChronologicalOrder() {
-        List<LocalDate> unsortedDates = Arrays.asList(
-                LocalDate.of(2023, 3, 3),
-                LocalDate.of(2023, 2, 2),
-                LocalDate.of(2023, 1, 1)
-        );
-        Collection<LocalDate> sortedDates = dateSorter.sortDates(unsortedDates);
-
-        assertEquals(3, sortedDates.size());
-        assertEquals(LocalDate.of(2023, 1, 1), sortedDates.iterator().next());
-        assertEquals(LocalDate.of(2023, 2, 2), sortedDates.iterator().next());
-        assertEquals(LocalDate.of(2023, 3, 3), sortedDates.iterator().next());
-    }
-
-    @Test
-    public void testSortListWithDuplicates() {
-        List<LocalDate> unsortedDates = Arrays.asList(
-                LocalDate.of(2023, 2, 2),
-                LocalDate.of(2023, 1, 1),
-                LocalDate.of(2023, 2, 2),
-                LocalDate.of(2023, 3, 3)
-        );
-        Collection<LocalDate> sortedDates = dateSorter.sortDates(unsortedDates);
-
-        assertEquals(3, sortedDates.size());
-        assertEquals(LocalDate.of(2023, 1, 1), sortedDates.iterator().next());
-        assertEquals(LocalDate.of(2023, 2, 2), sortedDates.iterator().next());
-        assertEquals(LocalDate.of(2023, 3, 3), sortedDates.iterator().next());
+        Collection<LocalDate> sortedDates = dateSorter.sortDates(actualDates);
+        assertEquals(4, sortedDates.size());
+        int i = 0;
+        for (LocalDate date : sortedDates) {
+            assertEquals(expectedDates.get(i), date);
+            i++;
+        }
     }
 }

@@ -1,7 +1,9 @@
 package sample;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -24,7 +26,7 @@ import java.util.List;
  * Implement in single class. Don't chane constructor and signature method.
  */
 public class DateSorter {
-
+    private static final String SPLIT_BY_LETTER = "r";
     /**
      * The implementation of this method should sort dates.
      * The output should be in the following order:
@@ -42,9 +44,24 @@ public class DateSorter {
      * @return the collection of dates now sorted as per the spec
      */
     public Collection<LocalDate> sortDates(List<LocalDate> unsortedDates) {
-        // your solution here
-
-
-        return null;
+        // Split list
+        List<LocalDate> datesWithTargetLetter = new ArrayList<>();
+        List<LocalDate> dateWithoutTargetLetter = new ArrayList<>();
+        for (LocalDate date : unsortedDates) {
+            String monthName = date.getMonth().name();
+            if (monthName.toLowerCase().contains(SPLIT_BY_LETTER)) {
+                datesWithTargetLetter.add(date);
+            } else {
+                dateWithoutTargetLetter.add(date);
+            }
+        }
+        // Sort lists
+        datesWithTargetLetter.sort(Comparator.naturalOrder());
+        dateWithoutTargetLetter.sort(Comparator.reverseOrder());
+        // Join lists
+        List<LocalDate> sortedDates = new ArrayList<>();
+        sortedDates.addAll(datesWithTargetLetter);
+        sortedDates.addAll(dateWithoutTargetLetter);
+        return sortedDates;
     }
 }
