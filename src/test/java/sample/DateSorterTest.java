@@ -12,12 +12,12 @@ import static org.junit.Assert.*;
 
 public class DateSorterTest {
     private DateSorter dateSorter = new DateSorter();
-    List<LocalDate> actualDates = Arrays.asList(LocalDate.of(2004,07,01),
-            LocalDate.of(2005,01,02), LocalDate.of(2007,01,01),
-            LocalDate.of(2032,05,03));
-    List<LocalDate> expectedDates = Arrays.asList(LocalDate.of(2005,01,02),
-            LocalDate.of(2007,01,01), LocalDate.of(2032,05,03),
-            LocalDate.of(2004,07,01));
+    List<LocalDate> actualDates = Arrays.asList(LocalDate.of(2004,7,1),
+            LocalDate.of(2005,1,2), LocalDate.of(2007,1,1),
+            LocalDate.of(2032,5,3));
+    List<LocalDate> expectedDates = Arrays.asList(LocalDate.of(2005,1,2),
+            LocalDate.of(2007,1,1), LocalDate.of(2032,5,3),
+            LocalDate.of(2004,7,1));
 
     @Test
     public void testSortEmptyList() {
